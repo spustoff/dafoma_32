@@ -194,3 +194,4 @@ struct CustomTabBar: View {
     DashboardView(dataService: DataService())
         .environmentObject(AppViewModel())
 }
+

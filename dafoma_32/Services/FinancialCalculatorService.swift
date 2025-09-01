@@ -150,3 +150,4 @@ class FinancialCalculatorService: ObservableObject {
             }
     }
 }
+

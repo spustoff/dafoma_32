@@ -401,3 +401,4 @@ struct ChallengeNavigationButtons: View {
         onComplete: { _ in }
     )
 }
+

@@ -517,3 +517,4 @@ struct MapControlButton: View {
     ProficiencyMapView()
         .environmentObject(AppViewModel())
 }
+

@@ -279,3 +279,4 @@ struct ChallengeCard: View {
     ChallengesTabView(viewModel: DashboardViewModel(dataService: DataService()))
         .background(Color(hex: "#02102b"))
 }
+

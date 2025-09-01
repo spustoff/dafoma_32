@@ -368,3 +368,4 @@ struct OverallStatCard: View {
     ProgressTabView(viewModel: DashboardViewModel(dataService: DataService()))
         .background(Color(hex: "#02102b"))
 }
+

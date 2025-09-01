@@ -83,3 +83,4 @@ struct UserProfile: Codable {
         case personal = "Personal Interest"
     }
 }
+

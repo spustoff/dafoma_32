@@ -158,3 +158,4 @@ extension LocationMultiplier {
         )
     ]
 }
+

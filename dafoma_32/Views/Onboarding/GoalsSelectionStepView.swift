@@ -183,3 +183,4 @@ struct GoalCard: View {
     GoalsSelectionStepView(viewModel: OnboardingViewModel())
         .background(Color(hex: "#02102b"))
 }
+

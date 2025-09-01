@@ -153,3 +153,4 @@ struct ProficiencyLevelButton: View {
     }())
     .background(Color(hex: "#02102b"))
 }
+

@@ -392,3 +392,4 @@ struct CategoryStatItem: View {
     AchievementsTabView(viewModel: DashboardViewModel(dataService: DataService()))
         .background(Color(hex: "#02102b"))
 }
+

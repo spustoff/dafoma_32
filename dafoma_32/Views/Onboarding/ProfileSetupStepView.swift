@@ -206,3 +206,4 @@ struct CustomTextFieldStyle: TextFieldStyle {
     ProfileSetupStepView(viewModel: OnboardingViewModel())
         .background(Color(hex: "#02102b"))
 }
+

@@ -123,3 +123,4 @@ struct FeatureRow: View {
     WelcomeStepView()
         .background(Color(hex: "#02102b"))
 }
+

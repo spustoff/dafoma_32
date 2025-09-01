@@ -316,3 +316,4 @@ struct QuestionReviewCard: View {
     )
     .background(Color(hex: "#02102b"))
 }
+

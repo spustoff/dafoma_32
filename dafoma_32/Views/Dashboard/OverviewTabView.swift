@@ -391,3 +391,4 @@ struct QuickStatCard: View {
     OverviewTabView(viewModel: DashboardViewModel(dataService: DataService()))
         .background(Color(hex: "#02102b"))
 }
+

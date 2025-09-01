@@ -148,3 +148,4 @@ class FinancialImpactViewModel: ObservableObject {
         }
     }
 }
+
